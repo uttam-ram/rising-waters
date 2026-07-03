@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Rising Waters — History{% endblock %}
+{% block content %}
+
+<section class="history-section">
+  <p class="eyebrow">Past predictions</p>
+  <h1>Prediction history</h1>
+
+  {% if not history %}
+  <p class="lede">No predictions yet. <a href="{{ url_for('predict') }}">Run your first prediction</a>.</p>
+  {% else %}
+  <div class="history-table-wrap">
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Annual Rainfall</th>
+          <th>Monsoon Rainfall</th>
+          <th>Cloud Visibility</th>
+          <th>Result</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for h in history %}
+        <tr>
+          <td>{{ h.timestamp }}</td>
+          <td>{{ h.inputs.AnnualRainfall }}</td>
+          <td>{{ h.inputs.MonsoonRainfall }}</td>
+          <td>{{ h.inputs.CloudVisibility }}</td>
+          <td>
+            {% if h.prediction == 1 %}
+              <span class="pill pill-flood">Flood</span>
+            {% else %}
+              <span class="pill pill-safe">No Flood</span>
+            {% endif %}
+          </td>
+          <td>{{ h.confidence ~ '%' if h.confidence is not none else '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

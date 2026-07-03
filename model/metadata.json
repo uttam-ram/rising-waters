@@ -1,0 +1,70 @@
+{
+  "best_model": "Random Forest",
+  "accuracy_percent": 84.33,
+  "feature_columns": [
+    "AnnualRainfall",
+    "MonsoonRainfall",
+    "CloudVisibility",
+    "Humidity",
+    "Temperature",
+    "RiverWaterLevel",
+    "SoilSaturation",
+    "WindSpeed",
+    "Elevation",
+    "DrainageQuality"
+  ],
+  "all_model_results": {
+    "Decision Tree": {
+      "accuracy": 77.67,
+      "confusion_matrix": [
+        [
+          276,
+          54
+        ],
+        [
+          80,
+          190
+        ]
+      ]
+    },
+    "Random Forest": {
+      "accuracy": 84.33,
+      "confusion_matrix": [
+        [
+          289,
+          41
+        ],
+        [
+          53,
+          217
+        ]
+      ]
+    },
+    "KNN": {
+      "accuracy": 81.0,
+      "confusion_matrix": [
+        [
+          283,
+          47
+        ],
+        [
+          67,
+          203
+        ]
+      ]
+    },
+    "XGBoost": {
+      "accuracy": 83.0,
+      "confusion_matrix": [
+        [
+          283,
+          47
+        ],
+        [
+          55,
+          215
+        ]
+      ]
+    }
+  }
+}

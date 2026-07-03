@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Rising Waters — Dashboard{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-gauge" aria-hidden="true">
+    <svg viewBox="0 0 200 200" class="gauge-svg">
+      <circle cx="100" cy="100" r="88" class="gauge-track"></circle>
+      <circle cx="100" cy="100" r="88" class="gauge-fill"></circle>
+      <text x="100" y="94" class="gauge-num">{{ metadata.get('accuracy_percent', '—') }}%</text>
+      <text x="100" y="118" class="gauge-label">model accuracy</text>
+    </svg>
+  </div>
+  <div class="hero-copy">
+    <p class="eyebrow">Early-warning system</p>
+    <h1>Know the water<br>before it rises.</h1>
+    <p class="lede">
+      Rising Waters turns rainfall, cloud visibility, and seasonal weather
+      readings into a flood-risk call in seconds — built for meteorologists,
+      disaster-response coordinators, and local authorities who need minutes,
+      not hours, of lead time.
+    </p>
+    <div class="hero-actions">
+      <a href="{{ url_for('predict') }}" class="btn btn-primary">Run a prediction</a>
+      <a href="{{ url_for('history') }}" class="btn btn-ghost">View history</a>
+    </div>
+  </div>
+</section>
+
+<section class="stat-row">
+  <div class="stat-card">
+    <span class="stat-value">{{ metadata.get('best_model', 'XGBoost') }}</span>
+    <span class="stat-label">Best-performing model</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-value">{{ metadata.get('accuracy_percent', '96.55') }}%</span>
+    <span class="stat-label">Test-set accuracy</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-value">10</span>
+    <span class="stat-label">Meteorological features</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-value">4</span>
+    <span class="stat-label">Algorithms compared</span>
+  </div>
+</section>
+
+<section class="scenarios">
+  <h2>Built for the field</h2>
+  <div class="scenario-grid">
+    <article class="scenario-card">
+      <span class="scenario-tag">Scenario 1</span>
+      <h3>Early Warning &amp; Evacuation</h3>
+      <p>A meteorologist enters current rainfall and cloud visibility for a
+      flood-prone district and gets a risk call hours ahead of impact.</p>
+    </article>
+    <article class="scenario-card">
+      <span class="scenario-tag">Scenario 2</span>
+      <h3>Disaster Response Allocation</h3>
+      <p>A relief coordinator monitors several regions at once during monsoon
+      season, prioritising resources by instant risk classification.</p>
+    </article>
+    <article class="scenario-card">
+      <span class="scenario-tag">Scenario 3</span>
+      <h3>Model Validation</h3>
+      <p>A government analyst checks predictions against historical flood
+      records to confirm the system is reliable for operational use.</p>
+    </article>
+  </div>
+</section>
+
+{% endblock %}

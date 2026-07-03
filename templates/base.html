@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Rising Waters{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="watermark-lines" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="{{ url_for('home') }}" class="brand">
+      <span class="brand-mark">≈</span>
+      <span class="brand-text">Rising Waters</span>
+    </a>
+    <nav class="navlinks">
+      <a href="{{ url_for('home') }}">Dashboard</a>
+      <a href="{{ url_for('predict') }}">Predict</a>
+      <a href="{{ url_for('history') }}">History</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <span>Rising Waters — ML Flood Early-Warning System</span>
+    <span class="footer-dim">Decision Tree · Random Forest · KNN · XGBoost</span>
+  </footer>
+</body>
+</html>

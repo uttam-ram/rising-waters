@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Rising Waters — Predict{% endblock %}
+{% block content %}
+
+<section class="form-section">
+  <div class="form-head">
+    <p class="eyebrow">Weather input</p>
+    <h1>Enter today's readings</h1>
+    <p class="lede">Fill in the current meteorological parameters for the
+    region you're assessing. All fields are required.</p>
+  </div>
+
+  {% if error %}
+  <div class="alert alert-error">{{ error }}</div>
+  {% endif %}
+
+  <form method="POST" action="{{ url_for('predict') }}" class="predict-form">
+    <div class="field-grid">
+      {% for key, (label, min_v, max_v, default_v) in fields.items() %}
+      <div class="field">
+        <label for="{{ key }}">{{ label }}</label>
+        <input
+          type="number"
+          step="any"
+          id="{{ key }}"
+          name="{{ key }}"
+          min="{{ min_v }}"
+          max="{{ max_v }}"
+          value="{{ values.get(key, default_v) if values else default_v }}"
+          required
+        >
+        <span class="field-range">{{ min_v }} – {{ max_v }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Predict flood risk</button>
+    </div>
+  </form>
+</section>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Rising Waters — Result{% endblock %}
+{% block content %}
+
+<section class="result-section {{ 'result-flood' if prediction == 1 else 'result-safe' }}">
+  <div class="result-badge">
+    {% if prediction == 1 %}
+      <span class="result-icon">⚠</span>
+      <h1>Flood Risk Detected</h1>
+      <p class="result-sub">The model predicts a <strong>high likelihood of
+      flooding</strong> based on the readings provided.</p>
+    {% else %}
+      <span class="result-icon">✓</span>
+      <h1>No Flood Risk</h1>
+      <p class="result-sub">The model predicts <strong>conditions are within
+      safe range</strong> based on the readings provided.</p>
+    {% endif %}
+    {% if confidence is not none %}
+    <div class="confidence">Confidence: {{ confidence }}%</div>
+    {% endif %}
+  </div>
+
+  <div class="result-inputs">
+    <h2>Readings used</h2>
+    <div class="input-recap-grid">
+      {% for key, value in inputs.items() %}
+      <div class="recap-item">
+        <span class="recap-label">{{ labels[key][0] }}</span>
+        <span class="recap-value">{{ value }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <a href="{{ url_for('predict') }}" class="btn btn-primary">Run another prediction</a>
+    <a href="{{ url_for('history') }}" class="btn btn-ghost">View history</a>
+  </div>
+</section>
+
+{% endblock %}
